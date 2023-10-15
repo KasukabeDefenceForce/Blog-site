@@ -1,20 +1,35 @@
 import './App.css';
-import { BrowserRouter as Router, Routes, Route, Link} from 'react-router-dom';
+import {Routes, Route} from 'react-router-dom';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import CreatePost from './pages/CreatePost';
 import Error from './pages/Error';
+import Navbar from './components/Navbar';
+import { useState } from 'react';
+import { signOut } from 'firebase/auth'
+import { useNavigate } from 'react-router-dom'
+import {auth}  from './firebase-config.js';
 
 function App() {
+  const [isAuth , setIsAuth] = useState(false)
+  let navigate = useNavigate();
+  const signUserOut = () => {
+      signOut(auth).then(() => {
+          localStorage.clear();
+          setIsAuth(false)
+          navigate("/login")
+      })
+  }
   return (
-    <Router>
+    <div>
+      <Navbar isAuth={isAuth} signUserOut={signUserOut}/>
       <Routes>
-        <Route path="/" element={<Home/>} />
-        <Route path="/createpost" element={<CreatePost/>} />
-        <Route path="/login" element={<Login/>}/>
+        <Route path="/" element={<Home isAuth={isAuth}/>} />
+        <Route path="/createpost" element={<CreatePost isAuth={isAuth}/>} />
+        <Route path="/login" element={<Login setIsAuth={setIsAuth}/>}/>
         <Route path="*" element={<Error/>}/>
       </Routes>
-    </Router>
+    </div>
   );
 }
 
