@@ -10,7 +10,6 @@ function Home({ isAuth }) {
     const postDoc = doc(db, "posts", id);
     await deleteDoc(postDoc);
   };
-
   useEffect(() => {
     const getPosts = async () => {
       const data = await getDocs(postsCollectionRef);
@@ -23,8 +22,7 @@ function Home({ isAuth }) {
 
   return (
     <div className="homePage">
-      {(postLists.length < 1)? 
-      postLists.map((post) => {
+      {postLists.map((post) => {
         return (
           <div className="post">
             <div className="postHeader">
@@ -48,7 +46,7 @@ function Home({ isAuth }) {
             <h3>@{post.author.name}</h3>
           </div>
         );
-      }) : (<h1>No posts to display</h1>)}
+      })}
     </div>
   );
 }
