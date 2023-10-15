@@ -2,7 +2,7 @@ import React from 'react'
 
 function Error() {
   return (
-    <div>Page doesnt Exist</div>
+    <h1>Page doesnt Exist</h1>
   )
 }
 
