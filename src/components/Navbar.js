@@ -7,7 +7,7 @@ const Navbar = ({isAuth, signUserOut}) => {
     <nav>
       <div>
         <Link to='/'>Home</Link>
-        <Link to='/createpost'>Create Post</Link>
+        {isAuth &&<Link to='/createpost'>Create Post</Link>}
         {!isAuth ? <Link to='/login'>Login</Link>: <button id="logOut" onClick={signUserOut}>Log Out</button>}
       </div>
     </nav>

@@ -11,9 +11,9 @@ import { useNavigate } from 'react-router-dom'
 import {auth}  from './firebase-config.js';
 
 function App() {
-  const [isAuth , setIsAuth] = useState(false)
+  const [isAuth , setIsAuth] = useState(localStorage.getItem("isAuth"))
   let navigate = useNavigate();
-  
+
   const signUserOut = () => {
       signOut(auth).then(() => {
           localStorage.clear();
