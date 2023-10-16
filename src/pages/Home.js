@@ -22,7 +22,8 @@ function Home({ isAuth }) {
 
   return (
     <div className="homePage">
-      {postLists.map((post) => {
+      {postLists.length === 0 ? (<h1>No posts to display</h1>):
+      (postLists.map((post) => {
         return (
           <div className="post">
             <div className="postHeader">
@@ -46,7 +47,7 @@ function Home({ isAuth }) {
             <h3>@{post.author.name}</h3>
           </div>
         );
-      })}
+      }))}
     </div>
   );
 }
